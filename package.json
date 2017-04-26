@@ -1,0 +1,15 @@
+{
+  "name": "jirarunner",
+  "version": "1.0.0",
+  "description": "A simple node.js module that executes JIRA JQL queries and processes returned data through a callback.",
+  "main": "jiraRunner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cory Sandahl",
+  "license": "ISC",
+  "dependencies": {
+    "jira": "^0.9.2",
+    "lodash": "^4.17.4"
+  }
+}
