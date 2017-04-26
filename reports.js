@@ -64,7 +64,7 @@ reports = {
 			
 			for (date in grp) {
 				console.log('\n  ' + date + ' work items: [' + grp[date].length + '] sum points: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10013}) + ']\n');
-				var l = {key: 18, type: 10, points: 8, resdate: 13, summary: 100};
+				var l = {key: 18, type: 10, points: 8, resdate: 13, summary: 85};
 				console.log('         '.concat(
 					utils.tableCell('key', l.key), 
 					utils.tableCell('type', l.type),
