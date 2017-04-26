@@ -15,8 +15,7 @@ You will need provide Zonar URL, user name and password in settings.js.
 Find all issues where resolutiondate is greater than the start of current day.
 
   ```
-  var utils = require('./utils.js'),
-    reports = require('./reports.js')
+  var utils = require('./utils.js');
 
   var config = {
     title: 'Example JIRA Runner Report',
