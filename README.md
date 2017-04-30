@@ -36,4 +36,4 @@ To run this report:
 
 ```node jiraRunner.js example.js```
 
-The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included utility method "debug" that pretty prints the returned JSON blob.
+The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included utility method "debug" that pretty prints the returned JSON document.
