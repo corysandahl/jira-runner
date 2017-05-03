@@ -1,6 +1,6 @@
 # jira-runner
 
-JIRA Runner is a simple node module that wraps a node JIRA client (https://github.com/steves/node-jira).  The wrapper exposes only the read operation and currently only supports executing JQL queries.  
+JIRA Runner is a simple node module that wraps an existing node JIRA client (https://github.com/steves/node-jira).  The wrapper exposes only the read operation and currently only supports executing JQL queries.  
 
 **Note:** You will need provide Zonar URL, user name and password in **settings.js**.
 
@@ -12,7 +12,7 @@ JIRA Runner is a simple node module that wraps a node JIRA client (https://githu
 
 ## Example ##
 
-The included exampl.js file is configured to find all issues where resolutiondate is greater than the start of current day.
+The included **example.js** file is configured to find all issues where resolutiondate is greater than the start of current day:
 
   ```
   var utils = require('./utils.js');
@@ -36,4 +36,4 @@ To run this report:
 
 ```node jiraRunner.js example.js```
 
-The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included utility method "debug" that pretty prints the returned JSON blob.
+The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included utility method "debug" that pretty prints the returned JSON document.
