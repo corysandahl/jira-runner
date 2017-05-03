@@ -26,7 +26,7 @@ The included **example.js** file is configured to find all issues where resoluti
       fields: ['summary','issuetype','status','assignee','customfield_10013', 'resolutiondate']
     },
     callback: function(payload) {
-      utils.debug(payload);
+      reports.workItemsStoryPointsByMonth(config, payload);
     }	
   }
 
@@ -36,4 +36,4 @@ To run this report:
 
 ```node jiraRunner.js example.js```
 
-The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included utility method "debug" that pretty prints the returned JSON document.
+The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included report template **workItemsStoryPointsByMonth** that provides a summary by assignee plus a detail rollup by assignee and month.
