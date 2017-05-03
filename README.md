@@ -12,7 +12,7 @@ JIRA Runner is a simple node module that wraps a node JIRA client (https://githu
 
 ## Example ##
 
-The included example.js file is configured to find all issues where resolutiondate is greater than the start of current day.
+The included example.js file is configured to find all issues where resolutiondate is greater than the start of current day:
 
   ```
   var utils = require('./utils.js');
