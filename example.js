@@ -11,8 +11,6 @@ var config = {
 	},
 	callback: function(payload) {
 		reports.workItemsStoryPointsByMonth(config, payload);
-		// utils.reportHeader(config, payload);
-		// utils.debug(payload);
 	}	
 }
 
