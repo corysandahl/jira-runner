@@ -7,7 +7,7 @@ var utils = {
         return s.join(',');
     },
     reportHeader: function(config, result) { // header
-        var num = 70,
+        var num = 100,
             chr = '-',
             res = ''.concat(chr.repeat(num),'\n',
                 '           Title: ',config.title,'\n',
