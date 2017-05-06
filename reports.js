@@ -56,27 +56,27 @@ reports = {
 				return obj.fields.resDate;
 			})
 
-			var assigneeTotals = 'work items: [' + summary[name].workItems + '] sum points: [' + summary[name].storyPoints + ']';
+			var assigneeTotals = '- WORK ITEMS: [' + summary[name].workItems + ']- SUM POINTS: [' + summary[name].storyPoints + ']';
 			console.log();
 			console.log('-'.repeat(100));
 			console.log(name + ' ' + assigneeTotals);
 			console.log('-'.repeat(100));
 			
 			for (date in grp) {
-				console.log('\n  ' + date + ' work items: [' + grp[date].length + '] sum points: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10013}) + ']\n');
+				console.log('\nMONTH: ' + date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10013}) + ']\n');
 				var l = {key: 18, type: 10, points: 8, resdate: 13, summary: 85};
-				console.log('         '.concat(
+				console.log('    '.concat(
 					utils.tableCell('key', l.key), 
 					utils.tableCell('type', l.type),
 					utils.tableCell('points', l.points),
 					utils.tableCell('resdate', l.resdate),
 					utils.tableCell('summary', l.summary)
 				));
-				console.log('         ' + '-'.repeat(91))
+				console.log('    ' + '-'.repeat(96))
 
 				grp[date].forEach(function(item) {
 					var points = (item.fields.customfield_10013) ? item.fields.customfield_10013.toString() : 'null';
-					console.log('         '.concat(
+					console.log('    '.concat(
 						utils.tableCell(item.key, l.key), 
 						utils.tableCell(item.fields.issuetype.name, l.type),
 						utils.tableCell(points, l.points),
