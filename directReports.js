@@ -11,7 +11,8 @@ const manager = 'Cory';
 
 var config = {
 	title: 'Team ' + manager + ' - Work Items and Story Points Report - By Assignee / Month',
-	query: "assignee IN (" + teams[manager].toString() + ") AND resolutiondate >= startOfYear() ORDER BY resolutiondate ASC",
+	query: "assignee IN (" + teams[manager].toString() + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+	// query: "assignee IN (" + teams[manager].toString() + ") AND resolutiondate >= startOfMonth() ORDER BY assignee ASC, resolutiondate ASC",
 	options: {
 		startAt: 0,
 		maxResults: 100,
@@ -20,6 +21,7 @@ var config = {
 	callback: function(payload) {
 		// utils.debug(payload);
 		reports.workItemsStoryPointsByMonth(config, payload);
+		// reports.workItemsStoryPointsByMonthCSV(config, payload);
 	}	
 }
 

@@ -1,0 +1,31 @@
+Title: <%-config.title%>
+Date:  <%-new Date().toString()%>
+Query: <%-config.query%>
+
+SUMMARY
+
+  Name                 Work Items  Story Points
+  ---------------------------------------------
+<% for (assignee in summary) {%>
+  <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-summary[assignee].storyPoints%><% } %>
+
+
+DETAILS
+
+<% for (assignee in summary) {%>
+=============================================================================
+NAME: <%=assignee%> WORK ITEMS: <%=summary[assignee].workItems%> STORY POINTS: <%=summary[assignee].storyPoints%>
+=============================================================================
+
+<% for (month in summary[assignee].details) { %>
+  MONTH: <%=month%> (<%=summary[assignee].details[month].length%>)
+
+    KEY         SUMMARY
+    -------------------------------------------------------------------------------------------
+    <%summary[assignee].details[month].forEach(function(item) {%>
+    <%=utils.tableCell(item.key, 12)%><%-utils.tableCell(item.fields.summary, 125)%><%})%>
+
+<% } %>
+<% } %>
+
+----------------

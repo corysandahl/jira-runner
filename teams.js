@@ -21,16 +21,14 @@ var teams = {
 	],
 	Cory: [
 		'amina.mansour', 
-		'matthew.roberts', 
+		'c.matthew.roberts', 
 		'dan.butler', 
 		'agata.kargol', 
-		'nicole.peoples', 
 		'nadia.bahrami', 
 		'an.nguyen', 
 		'jeff.vandenberg', 
 		'eric.perser', 
 		'c.erika.rudzis', 
-		'c.jose.collas', 
 		'c.ronel.fernandez'
 	],
 	Conner: [

@@ -1,7 +1,8 @@
 var settings = {
+    confluenceBaseURL: 'https://confluence.zonarsystems.net',
     apiSettings: {
-        url: '',
-        userName: '',
+        url: 'jira.zonarsystems.net',
+        userName: 'cory.sandahl',
         password: ''
     },
     payloadObject: {
