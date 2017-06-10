@@ -17,10 +17,9 @@ var config = {
 	},
 	callback: function(payload) {
 
-		summary = {};
-		results = payload.Results;
+		summary = {}, results = payload.Results;
 
-		// Set resDate for all
+		// Set resDate (2017-06 for example)
 		results.forEach(function(item) {
 			if (item.fields.resolutiondate) {
 				item.fields.resDate = item.fields.resolutiondate.substring(0,7);
@@ -36,7 +35,7 @@ var config = {
 			}
 		});
 
-		// Create Summary by Assignee
+		// Create Summary by Assignee and Group By resDate for details
 		for (name in assignees) {
 			summary[name] = {
 				workItems: assignees[name].length, 
@@ -45,24 +44,19 @@ var config = {
 						return obj.fields.customfield_10013;
 					})
 			};
-		}
-		
-		// For Each Assignee
-		for (name in assignees) {
 			var grp = _.groupBy(assignees[name], function(obj) {
 				return obj.fields.resDate;
 			})
 			summary[name].details = grp;			
 		}
-
-		// utils.debug(summary);
-
+		
 		var ret = ejs.render(str, 
 		{
 		  utils: utils,
 		  summary: summary,
 		  config: config,
-		  filename: path
+		  filename: path,
+		  _: _
 		});
 		console.log(ret);
 	}	

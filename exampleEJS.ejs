@@ -10,6 +10,23 @@ SUMMARY
   <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-summary[assignee].storyPoints%><% } %>
 
 
+SUMMARY BY MONTH
+
+  Name                 Work Items  Story Points
+  ---------------------------------------------
+<% for (assignee in summary) {%>
+  <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-summary[assignee].storyPoints%> 
+	<% for (month in summary[assignee].details) { 
+
+	var sp = _.sumBy(summary[assignee].details[month], 
+		function(obj) { 
+			return obj.fields.customfield_10013;
+		})
+	%>
+    <%-utils.tableCell(month,18)%> <%-utils.tableCell(summary[assignee].details[month].length.toString(),11)%> <%-sp%><%}%>
+<% } %>
+
+
 DETAILS
 
 <% for (assignee in summary) {%>
@@ -23,9 +40,7 @@ NAME: <%=assignee%> WORK ITEMS: <%=summary[assignee].workItems%> STORY POINTS: <
     KEY         SUMMARY
     -------------------------------------------------------------------------------------------
     <%summary[assignee].details[month].forEach(function(item) {%>
-    <%=utils.tableCell(item.key, 12)%><%-utils.tableCell(item.fields.summary, 125)%><%})%>
+    <%=utils.tableCell(item.key, 12)%><%-item.fields.summary%><%})%>
 
 <% } %>
 <% } %>
-
-----------------
