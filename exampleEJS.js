@@ -9,7 +9,7 @@ var ejs = require('ejs')
 
 var config = {
 	title: 'Example JIRA Runner Report',
-	query: "resolutiondate >= startOfYear() and Project = 'RTB' ORDER BY resolutiondate ASC",
+	query: "assignee IN (amina.mansour,c.matthew.roberts,dan.butler,agata.kargol,nadia.bahrami,c.jeff.brown,an.nguyen,jeff.vandenberg,eric.perser,c.erika.rudzis,c.ronel.fernandez) AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
 	options: {
 		startAt: 0,
 		maxResults: 100,

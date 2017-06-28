@@ -2,7 +2,7 @@ Title: <%-config.title%>
 Date:  <%-new Date().toString()%>
 Query: <%-config.query%>
 
-SUMMARY
+OVERALL SUMMARY
 
   Name                 Work Items  Story Points
   ---------------------------------------------
@@ -24,11 +24,12 @@ SUMMARY BY MONTH
 		})
 	%>
     <%-utils.tableCell(month,18)%> <%-utils.tableCell(summary[assignee].details[month].length.toString(),11)%> <%-sp%><%}%>
+  
+    -------
 <% } %>
 
 
-DETAILS
-
+DETAILS BY ASSIGNEE BY MONTH
 <% for (assignee in summary) {%>
 =============================================================================
 NAME: <%=assignee%> WORK ITEMS: <%=summary[assignee].workItems%> STORY POINTS: <%=summary[assignee].storyPoints%>
