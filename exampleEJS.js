@@ -1,65 +1,121 @@
-var ejs = require('ejs')
-  , fs = require('fs')
-  , path = __dirname + '/exampleEJS.ejs'
-  , str = fs.readFileSync(path, 'utf8')
-  , utils = require('./utils.js')
-  , reports = require('./reports.js')
-  , _ = require('lodash');
+var ejs = require('ejs'), 
+  fs = require('fs'),
+  path = __dirname + '/exampleEJS.ejs',
+  str = fs.readFileSync(path, 'utf8'),
+  utils = require('./utils.js'),
+  _ = require('lodash'),
+  configMaster = require(process.argv[3]),
+  config = configMaster.jiraConfig;
 
+var callback = function(payload) {
 
-var config = {
-	title: 'Example JIRA Runner Report',
-	query: "assignee IN (amina.mansour,c.matthew.roberts,dan.butler,agata.kargol,nadia.bahrami,c.jeff.brown,an.nguyen,jeff.vandenberg,eric.perser,c.erika.rudzis,c.ronel.fernandez) AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
-	options: {
-		startAt: 0,
-		maxResults: 100,
-		fields: ['summary','description','issuetype','status','assignee','customfield_10013', 'resolutiondate']
-	},
-	callback: function(payload) {
+	// ************************************************
+	// Get the git commits
+	// ************************************************
 
-		summary = {}, results = payload.Results;
+	var i = 0;		
 
-		// Set resDate (2017-06 for example)
-		results.forEach(function(item) {
-			if (item.fields.resolutiondate) {
-				item.fields.resDate = item.fields.resolutiondate.substring(0,7);
-			}
-		})
+	(function loop() {
+        if (i < configMaster.gitRepos.length) {
+			require('simple-git')(configMaster.gitRepos[i])
+				.pull()
+				.log(function(err, log) {
 
-		// Group By Assignee
-		var assignees = _.groupBy(results, function(obj) {
-			if (obj.fields.assignee) {
-				return obj.fields.assignee.displayName;
-			} else {
-				return 'Unknown';
-			}
-		});
+				var customObj = {};
 
-		// Create Summary by Assignee and Group By resDate for details
-		for (name in assignees) {
-			summary[name] = {
-				workItems: assignees[name].length, 
-				storyPoints: _.sumBy(assignees[name], 
-					function(obj) { 
-						return obj.fields.customfield_10013;
+				// Group By Author
+				var authors = _.groupBy(log.all, function(obj) {
+					return obj.author_name;
+				});
+
+				// Group by Months
+				for (name in authors) {
+					var months = _.groupBy(authors[name], function(obj) {
+						return obj.date.substring(0,7);
 					})
-			};
-			var grp = _.groupBy(assignees[name], function(obj) {
-				return obj.fields.resDate;
+					customObj[name] = months;
+				}
+
+				// Loop aliases and combine commit totals by month
+				for (name in configMaster.users) {
+					configMaster.users[name].aliases.forEach(function(alias) {
+						for (month in customObj[alias]) {
+							if (configMaster.users[name].commits.hasOwnProperty(month)) {
+								configMaster.users[name].commits[month] += customObj[alias][month].length;
+							} else {
+								configMaster.users[name].commits[month] = customObj[alias][month].length;
+							}
+						}
+					}) 
+				}		
+	        	i++;
+	        	loop();
 			})
-			summary[name].details = grp;			
-		}
-		
-		var ret = ejs.render(str, 
-		{
-		  utils: utils,
-		  summary: summary,
-		  config: config,
-		  filename: path,
-		  _: _
-		});
-		console.log(ret);
-	}	
-}
+        } else {
+
+			// ************************************************
+			// Process both the JIRA and GIT Data
+			// ************************************************
+
+			summary = {}, results = payload.Results;
+
+			// Set resDate (2017-06 for example)
+			results.forEach(function(item) {
+				if (item.fields.resolutiondate) {
+					item.fields.resDate = item.fields.resolutiondate.substring(0,7);
+				}
+			})
+
+			// Group By Assignee
+			var assignees = _.groupBy(results, function(obj) {
+				if (obj.fields.assignee) {
+					return obj.fields.assignee.displayName;
+				} else {
+					return 'Unknown';
+				}
+			});
+
+			// Create Summary by Assignee and Group By resDate for details
+			for (name in assignees) {
+				summary[name] = {
+					workItems: assignees[name].length, 
+					storyPoints: _.sumBy(assignees[name], 
+						function(obj) { 
+							return obj.fields.customfield_10013;
+						})
+				};
+				var grp = _.groupBy(assignees[name], function(obj) {
+					return obj.fields.resDate;
+				})
+				summary[name].details = grp;			
+			}
+			
+			// Summarize git commits and add to summary object
+			for (name in configMaster.users) {
+				var sum = 0;
+				for (month in summary[name].details) {
+					if (typeof(configMaster.users[name].commits[month]) == "number") {
+						sum += configMaster.users[name].commits[month];
+					}
+				}
+				summary[name].commitTotals = sum;
+			}
+
+			// Wrap it up in an object and send off to EJS land
+			var ret = ejs.render(str, 
+			{
+			  commits: configMaster,
+			  utils: utils,
+			  summary: summary,
+			  config: config,
+			  filename: path,
+			  _: _
+			});
+			console.log(ret);
+        }
+    }());
+}	
+
+config.callback = callback;
 
 module.exports = config;

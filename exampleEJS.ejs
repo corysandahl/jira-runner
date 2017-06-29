@@ -4,26 +4,30 @@ Query: <%-config.query%>
 
 OVERALL SUMMARY
 
-  Name                 Work Items  Story Points
-  ---------------------------------------------
+  Name                 Work Items  Story Points  Commits
+  -------------------------------------------------------------
 <% for (assignee in summary) {%>
-  <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-summary[assignee].storyPoints%><% } %>
+  <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-utils.tableCell(summary[assignee].storyPoints.toString(), 14)%><%-summary[assignee].commitTotals%><% } %>
 
 
 SUMMARY BY MONTH
 
-  Name                 Work Items  Story Points
-  ---------------------------------------------
+  Name                 Work Items  Story Points  Commits
+  -------------------------------------------------------------
 <% for (assignee in summary) {%>
-  <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-summary[assignee].storyPoints%> 
+  <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-utils.tableCell(summary[assignee].storyPoints.toString(), 14)%><%-summary[assignee].commitTotals%>
 	<% for (month in summary[assignee].details) { 
 
 	var sp = _.sumBy(summary[assignee].details[month], 
 		function(obj) { 
 			return obj.fields.customfield_10013;
 		})
+
+  if (sp == "") sp = 0;
+  if (sp == undefined) sp = 0;
+
 	%>
-    <%-utils.tableCell(month,18)%> <%-utils.tableCell(summary[assignee].details[month].length.toString(),11)%> <%-sp%><%}%>
+    <%-utils.tableCell(month,18)%> <%-utils.tableCell(summary[assignee].details[month].length.toString(),11)%> <%-utils.tableCell(sp.toString(), 13)%> <%-commits.users[assignee].commits[month]%><%}%>
   
     -------
 <% } %>
