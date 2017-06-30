@@ -9,6 +9,8 @@ var ejs = require('ejs'),
 
 var callback = function(payload) {
 
+	console.log('JIRA payload received - processing GIT repos...')
+
 	// ************************************************
 	// Get the git commits
 	// ************************************************
@@ -17,6 +19,7 @@ var callback = function(payload) {
 
 	(function loop() {
         if (i < configMaster.gitRepos.length) {
+        	console.log('Processing Git repo ' + configMaster.gitRepos[i]);
 			require('simple-git')(configMaster.gitRepos[i])
 				.pull()
 				.log(function(err, log) {
@@ -84,24 +87,29 @@ var callback = function(payload) {
 							return obj.fields.customfield_10013;
 						})
 				};
+				if (summary[name].storyPoints == undefined) summary[name].storyPoints = 0;
 				var grp = _.groupBy(assignees[name], function(obj) {
 					return obj.fields.resDate;
 				})
-				summary[name].details = grp;			
-			}
-			
-			// Summarize git commits and add to summary object
-			for (name in configMaster.users) {
-				var sum = 0;
-				for (month in summary[name].details) {
-					if (typeof(configMaster.users[name].commits[month]) == "number") {
-						sum += configMaster.users[name].commits[month];
-					}
-				}
-				summary[name].commitTotals = sum;
+				summary[name].details = grp;
 			}
 
+			// Summarize git commits and add to summary object
+			for (name in configMaster.users) {
+				if (summary[name] != undefined) {
+					var sum = 0;
+					for (month in summary[name].details) {
+						if (typeof(configMaster.users[name].commits[month]) == "number") {
+							sum += configMaster.users[name].commits[month];
+						}
+					}
+					summary[name].commitTotals = sum;
+				}
+			}
+
+			// ************************************************
 			// Wrap it up in an object and send off to EJS land
+			// ************************************************
 			var ret = ejs.render(str, 
 			{
 			  commits: configMaster,

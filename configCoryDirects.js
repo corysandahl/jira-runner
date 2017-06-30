@@ -59,7 +59,8 @@ var config = {
 	    '/Users/cory.sandahl/git/ansible-pupil',
 	    '/Users/cory.sandahl/git/Rider-Verification',
 	    '/Users/cory.sandahl/git/gtc',
-	    '/Users/cory.sandahl/git/GTC4'
+	    '/Users/cory.sandahl/git/GTC4',
+	    '/Users/cory.sandahl/git/gtc_db'
 	]
 }
 

@@ -11,7 +11,7 @@ OVERALL SUMMARY
   <%-utils.tableCell(assignee, 20)%> <%-utils.tableCell(summary[assignee].workItems.toString(), 12)%><%-utils.tableCell(summary[assignee].storyPoints.toString(), 14)%><%-summary[assignee].commitTotals%><% } %>
 
 
-SUMMARY BY MONTH
+SUMMARY BY ASSIGNEE BY MONTH
 
   Name                 Work Items  Story Points  Commits
   -------------------------------------------------------------
@@ -36,10 +36,9 @@ SUMMARY BY MONTH
 
 JIRA DETAILS BY ASSIGNEE BY MONTH
 <% for (assignee in summary) {%>
-=============================================================================
-NAME: <%=assignee%> WORK ITEMS: <%=summary[assignee].workItems%> STORY POINTS: <%=summary[assignee].storyPoints%>
-=============================================================================
-
+        NAME: <%=assignee%> 
+  WORK ITEMS: <%=summary[assignee].workItems%> 
+STORY POINTS: <%=summary[assignee].storyPoints%>
 <% for (month in summary[assignee].details) { %>
   MONTH: <%=month%> (<%=summary[assignee].details[month].length%>)
 
