@@ -36,16 +36,51 @@ SUMMARY BY ASSIGNEE BY MONTH
 
 JIRA DETAILS BY ASSIGNEE BY MONTH
 <% for (assignee in summary) {%>
-        NAME: <%=assignee%> 
-  WORK ITEMS: <%=summary[assignee].workItems%> 
-STORY POINTS: <%=summary[assignee].storyPoints%>
+        Name: <%=assignee%> 
+  Work Items: <%=summary[assignee].workItems%> 
+Story Points: <%=summary[assignee].storyPoints%>
 <% for (month in summary[assignee].details) { %>
-  MONTH: <%=month%> (<%=summary[assignee].details[month].length%>)
+  Month: <%=month%> (<%=summary[assignee].details[month].length%>)
 
-    KEY         SUMMARY
+    Key         Description
     -------------------------------------------------------------------------------------------
     <%summary[assignee].details[month].forEach(function(item) {%>
     <%=utils.tableCell(item.key, 12)%><%-item.fields.summary%><%})%>
 
 <% } %>
 <% } %>
+
+GIT COMMIT SUMMARY BY ASSIGNEE BY MONTH
+<% for (name in gitDetails) {%>
+Name: <%-name%>
+<% var ar = [];
+    for (month in gitDetails[name]) {
+      ar.push(month);
+    }
+    ar.sort();
+%>
+    Month    Count
+    -----------------
+  <% ar.forEach(function(month) {%>
+    <%-utils.tableCell(month, 8)%> <%-gitDetails[name][month].length%><%})%>
+<%}%>
+
+
+GIT COMMIT DETAILS BY ASSIGNEE BY MONTH
+<% for (name in gitDetails) {%>
+Name: <%-name%>
+<% var ar = [];
+    for (month in gitDetails[name]) {
+      ar.push(month);
+    }
+    ar.sort();
+%>
+  <% ar.forEach(function(month) {%>
+    Month: <%-month%> (<%-gitDetails[name][month].length%>)
+        <% gitDetails[name][month].forEach(function(commit) {%>
+          <%-commit.date.substring(0,10)%> <%-commit.repo%> <%-commit.message%><%})%>
+    <%})%>
+<%}%>
+
+
+

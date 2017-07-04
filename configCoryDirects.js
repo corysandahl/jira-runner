@@ -9,7 +9,7 @@ var config = {
 			"commits": {}
 		},
 		"Amina Mansour": {
-			"aliases": ["amina.mansour"],
+			"aliases": ["amina.mansour","aminamansour"],
 			"commits": {}
 		},
 		"Jeff Brown": {

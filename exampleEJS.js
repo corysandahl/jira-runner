@@ -15,42 +15,28 @@ var callback = function(payload) {
 	// Get the git commits
 	// ************************************************
 
-	var i = 0;		
+	var i = 0, commits = [];
 
 	(function loop() {
-        if (i < configMaster.gitRepos.length) {
-        	console.log('Processing Git repo ' + configMaster.gitRepos[i]);
+	    if (i < configMaster.gitRepos.length) {
+	    	console.log('Processing Git repo ' + configMaster.gitRepos[i]);
 			require('simple-git')(configMaster.gitRepos[i])
 				.pull()
 				.log(function(err, log) {
 
-				var customObj = {};
-
-				// Group By Author
-				var authors = _.groupBy(log.all, function(obj) {
-					return obj.author_name;
-				});
-
-				// Group by Months
-				for (name in authors) {
-					var months = _.groupBy(authors[name], function(obj) {
-						return obj.date.substring(0,7);
-					})
-					customObj[name] = months;
-				}
-
-				// Loop aliases and combine commit totals by month
-				for (name in configMaster.users) {
-					configMaster.users[name].aliases.forEach(function(alias) {
-						for (month in customObj[alias]) {
-							if (configMaster.users[name].commits.hasOwnProperty(month)) {
-								configMaster.users[name].commits[month] += customObj[alias][month].length;
-							} else {
-								configMaster.users[name].commits[month] = customObj[alias][month].length;
+				// Append repo name and display name
+				log.all.forEach(function(commit) {
+					commit.repo = configMaster.gitRepos[i];					
+					for (name in configMaster.users) {
+						configMaster.users[name].aliases.forEach(function(alias) {
+							if (alias == commit.author_name) {
+								commit.display_name = name;
 							}
-						}
-					}) 
-				}		
+						})
+					}
+					commits.push(commit);
+				})
+
 	        	i++;
 	        	loop();
 			})
@@ -59,6 +45,31 @@ var callback = function(payload) {
 			// ************************************************
 			// Process both the JIRA and GIT Data
 			// ************************************************
+
+
+			// Group By Display Name
+			var authors = _.groupBy(commits, function(obj) {
+				return obj.display_name;
+			});
+
+			var gitDetails = {};
+
+			// Group by Months
+			for (name in authors) {
+				var months = _.groupBy(authors[name], function(obj) {
+					return obj.date.substring(0,7);
+				})
+				gitDetails[name] = months;
+			}
+
+			// Summarize commits
+			for (name in configMaster.users) {
+				for (month in gitDetails[name]) {
+					if (configMaster.users.hasOwnProperty(name)) {
+						configMaster.users[name].commits[month] = gitDetails[name][month].length;
+					}
+				}
+			}
 
 			summary = {}, results = payload.Results;
 
@@ -110,8 +121,10 @@ var callback = function(payload) {
 			// ************************************************
 			// Wrap it up in an object and send off to EJS land
 			// ************************************************
+
 			var ret = ejs.render(str, 
 			{
+			  gitDetails: gitDetails,
 			  commits: configMaster,
 			  utils: utils,
 			  summary: summary,
