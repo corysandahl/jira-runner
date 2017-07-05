@@ -55,9 +55,7 @@ GIT COMMIT SUMMARY BY COMMITTER BY MONTH
 Name: <%-name%>
 <% var ar = [];
     for (month in gitDetails[name]) {
-      ar.push(month);
-    }
-    ar.sort();
+      if (monthsMaster.indexOf(month) >= 0) { ar.push(month);  } } ar.sort();
 %>
     Month    Count
     -----------------
@@ -71,12 +69,13 @@ GIT COMMIT DETAILS BY COMMITTER BY MONTH
 Name: <%-name%>
 <% var ar = [];
     for (month in gitDetails[name]) {
-      ar.push(month);
+      if (monthsMaster.indexOf(month) >= 0) {
+        ar.push(month);
+      }
     }
     ar.sort();
 %>
-  <% ar.forEach(function(month) {%>
-      <% var details = gitDetails[name][month].sort(function(a,b) { return a.date.localeCompare(b.date) })%>
+  <% ar.forEach(function(month) {%><% var details = gitDetails[name][month].sort(function(a,b) { return a.date.localeCompare(b.date) })%>
     Month: <%-month%> (<%-gitDetails[name][month].length%>)
         <% details.forEach(function(commit) {%>
           <%-commit.date.substring(0,10)%> [<%-commit.repo.substr(commit.repo.lastIndexOf('/') + 1)%>] <%-commit.message%><%})%>

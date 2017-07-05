@@ -5,7 +5,8 @@ var ejs = require('ejs'),
   utils = require('./utils.js'),
   _ = require('lodash'),
   configMaster = require(process.argv[3]),
-  config = configMaster.jiraConfig;
+  config = configMaster.jiraConfig,
+  monthsMaster = []
 
 var callback = function(payload) {
 
@@ -73,6 +74,14 @@ var callback = function(payload) {
 
 			summary = {}, results = payload.Results;
 
+
+			results.forEach(function(item) {
+				var monthString = item.fields.resolutiondate.substring(0,7);
+				if (monthsMaster.indexOf(monthString) < 0) {
+					monthsMaster.push(monthString);
+				}
+			})
+
 			// Set resDate (2017-06 for example)
 			results.forEach(function(item) {
 				if (item.fields.resolutiondate) {
@@ -124,6 +133,7 @@ var callback = function(payload) {
 
 			var ret = ejs.render(str, 
 			{
+			  monthsMaster: monthsMaster,
 			  gitDetails: gitDetails,
 			  commits: configMaster,
 			  utils: utils,
