@@ -1,6 +1,6 @@
 var ejs = require('ejs'), 
   fs = require('fs'),
-  path = __dirname + '/exampleEJS.ejs',
+  path = __dirname + '/jiraGitSummary.ejs',
   str = fs.readFileSync(path, 'utf8'),
   utils = require('./utils.js'),
   _ = require('lodash'),
@@ -47,7 +47,6 @@ var callback = function(payload) {
 			// Process both the JIRA and GIT Data
 			// ************************************************
 
-
 			// Group By Display Name
 			var authors = _.groupBy(commits, function(obj) {
 				return obj.display_name;
@@ -73,7 +72,6 @@ var callback = function(payload) {
 			}
 
 			summary = {}, results = payload.Results;
-
 
 			results.forEach(function(item) {
 				var monthString = item.fields.resolutiondate.substring(0,7);

@@ -1,45 +1,29 @@
 var config = {
 	users: {
-		"Alexander North": {
-			"aliases": ["Alexander North", "Alex North"],
-			"commits": {}
-		},
-		"Brandon Warren": {
-			"aliases": ["Brandon Warren"],
-			"commits": {}
-		},
-		"James Hutchison": {
-			"aliases": ["James Hutchison", "JamesHutchison"],
-			"commits": {}
-		},
-		"Michael Delaney": {
-			"aliases": ["Michael Delaney","Mike Delaney","MikeDelaney"],
-			"commits": {}
-		},
 		"Nathan Deren": {
 			"aliases": ["Nathan Deren", "nathan.deren"],
+			"email": "nderen@gmail.com",
 			"commits": {}
 		},
 		"Parker Coleman": {
 			"aliases": ["Parker Coleman", "parkercoleman"],
+			"email": "	",
 			"commits": {}
 		},
 		"Taylor Rolison": {
 			"aliases": ["Taylor Rolison", "trolison", "taylor-rolison"],
+			"email": "",
 			"commits": {}
 		},
 		"Tim Sweany": {
 			"aliases": ["Tim Sweany", "Timothy Sweany"],
-			"commits": {}
-		},
-		"Brian MacDonald": {
-			"aliases": ["Brian MacDonald", "brian-macdonald-zonar", "c-brian-macdonald"],
+			"email": "",
 			"commits": {}
 		},
 	},
 	jiraConfig: {
-		title: 'Example JIRA Runner Report',
-		query: "assignee IN ('brian.macdonald','alexander.north','brandon.warren','James.Hutchison','michael.delaney','nathan.deren','parker.coleman','taylor.rolison', 'tim.sweany') AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		title: 'DS POD - Since Beginning of 2017',
+		query: "assignee IN ('nathan.deren','parker.coleman','taylor.rolison', 'tim.sweany') AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
 		options: {
 			startAt: 0,
 			maxResults: 100,
