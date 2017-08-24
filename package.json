@@ -4,13 +4,15 @@
   "description": "A simple node.js module that executes JIRA JQL queries and processes returned data through a callback.",
   "main": "jiraRunner.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "jasmine"},
   "author": "Cory Sandahl",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2",
     "jira": "^0.9.2",
     "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "jasmine": "^2.7.0"
   }
 }

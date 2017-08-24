@@ -1,4 +1,11 @@
 var utils = {
+    getJiraNames: function(users) {
+        var names = [];
+        for ( user in users ) { 
+            names.push(users[user].jiraName);
+        }
+        return names.join();
+    },
     objToCSV: function(obj) {
         var s = [];
         for (attr in obj) {

@@ -42,10 +42,12 @@ Story Points: <%=summary[assignee].storyPoints%>
 <% for (month in summary[assignee].details) { %>
   Month: <%=month%> (<%=summary[assignee].details[month].length%>)
 
-    Key          Issue Type   Description
+    Key          Issue Type   Story Points Description
     -------------------------------------------------------------------------------------------
-    <%summary[assignee].details[month].forEach(function(item) {%>
-    <%=utils.tableCell(item.key, 12)%> <%-utils.tableCell(item.fields.issuetype.name, 12)%> <%-item.fields.summary%><%})%>
+    <%summary[assignee].details[month].forEach(function(item) {
+        var sp = item.fields.customfield_10013 || 0;
+    %>
+    <%=utils.tableCell(item.key, 12)%> <%-utils.tableCell(item.fields.issuetype.name, 12)%> <%-utils.tableCell(sp.toString(), 12)%> <%-item.fields.summary%><%})%>
 
 <% } %>
 <% } %>

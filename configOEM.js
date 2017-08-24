@@ -1,34 +1,44 @@
-var config = {
-	users: {
-		"Alexander North": {
-			"aliases": ["Alexander North", "Alex North"],
-			"email": "alexander.north@zonarsystems.com",
-			"commits": {}
-		},
-		"Brandon Warren": {
-			"aliases": ["Brandon Warren"],
-			"email": "brandon.warren@zonarsystems.com",
-			"commits": {}
-		},
-		"Brian MacDonald": {
-			"aliases": ["Brian MacDonald", "brian-macdonald-zonar", "c-brian-macdonald"],
-			"email": "",
-			"commits": {}
-		},
-		"James Hutchison": {
-			"aliases": ["James Hutchison", "JamesHutchison"],
-			"email": "james.hutchison@zonarsystems.com",
-			"commits": {}
-		},
-		"Michael Delaney": {
-			"aliases": ["Michael Delaney","Mike Delaney","MikeDelaney"],
-			"email": "mdelaney@utexas.edu",
-			"commits": {}
-		},
+var utils = require('./utils.js');
+
+var users = 
+{
+	"Alexander North": {
+		"gitAliases": ["Alexander North", "Alex North"],
+		"email": "alexander.north@zonarsystems.com",
+		"jiraName": "alexander.north",
+		"commits": {}
 	},
+	"Brandon Warren": {
+		"gitAliases": ["Brandon Warren"],
+		"email": "brandon.warren@zonarsystems.com",
+		"jiraName": "brandon.warren",
+		"commits": {}
+	},
+	"Brian MacDonald": {
+		"gitAliases": ["Brian MacDonald", "brian-macdonald-zonar", "c-brian-macdonald"],
+		"email": "",
+		"jiraName": "brian.macdonald",
+		"commits": {}
+	},
+	"James Hutchison": {
+		"gitAliases": ["James Hutchison", "JamesHutchison"],
+		"email": "james.hutchison@zonarsystems.com",
+		"jiraName": "James.Hutchison",
+		"commits": {}
+	},
+	"Michael Delaney": {
+		"gitAliases": ["Michael Delaney","Mike Delaney","MikeDelaney"],
+		"email": "mdelaney@utexas.edu",
+		"jiraName": "michael.delaney",
+		"commits": {}
+	}
+}
+
+var config = {
+	users: users,
 	jiraConfig: {
 		title: 'OEM POD - Since Beginning of 2017',
-		query: "assignee IN ('brian.macdonald','alexander.north','brandon.warren','James.Hutchison','michael.delaney') AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
 		options: {
 			startAt: 0,
 			maxResults: 100,

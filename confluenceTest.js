@@ -4,11 +4,10 @@ var _ = require('lodash'),
 	reports = require('./reports.js'),
 	teams = require('./teams.js');
 
-// manager = 'Cory';
-manager = 'Sesh';
+manager = 'Cory';
+// manager = 'Sesh';
 // manager = 'Leo';
 // manager = 'Conner';
-// manager = 'Jennifer';
 
 var config = {
 	query: "assignee in (" + teams[manager].toString() + ") AND resolutiondate >= startOfYear() ORDER BY resolutiondate ASC",

@@ -1,29 +1,44 @@
-var config = {
-	users: {
-		"Jeff Vandenberg": {
-			"aliases": ["Jeff Vandenberg", "JeffVandenberg"],
-			"commits": {}
-		},
-		"An Nguyen": {
-			"aliases": ["An Nguyen", "an nguyen"],
-			"commits": {}
-		},
-		"Eric Perser": {
-			"aliases": ["Eric Perser","wigglyworld"],
-			"commits": {}
-		},
-		"Ronel Fernandez": {
-			"aliases": ["Ronel Fernandez"],
-			"commits": {}
-		},
-		"Erika Rudzis": {
-			"aliases": ["Erika Rudzis"],
-			"commits": {}
-		}
+var utils = require('./utils.js');
+
+var users = 
+{
+	"Jeff Vandenberg": {
+		"gitAliases": ["Jeff Vandenberg", "JeffVandenberg"],
+		"jiraName": "jeff.vandenberg",
+		"commits": {}
 	},
+	"An Nguyen": {
+		"gitAliases": ["An Nguyen", "an nguyen"],
+		"jiraName": "an.nguyen",
+		"commits": {}
+	},
+	"Eric Perser": {
+		"gitAliases": ["Eric Perser","wigglyworld"],
+		"jiraName": "eric.perser",
+		"commits": {}
+	},
+	"Ronel Fernandez": {
+		"gitAliases": ["Ronel Fernandez"],
+		"jiraName": "c.ronel.fernandez",
+		"commits": {}
+	},
+	"Erika Rudzis": {
+		"gitAliases": ["Erika Rudzis"],
+		"jiraName": "erika.rudzis",
+		"commits": {}
+	},
+	"Jerissa Lumansoc": {
+		"gitAliases": ["Jerissa Lumansoc"],
+		"jiraName": "c.jerissa.lumansoc",
+		"commits": {}
+	}
+}
+
+var config = {
+	users: users,
 	jiraConfig: {
 		title: 'GTC POD - Since Beginning of 2017',
-		query: "assignee IN (an.nguyen,jeff.vandenberg,eric.perser,c.erika.rudzis,c.ronel.fernandez) AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
 		options: {
 			startAt: 0,
 			maxResults: 100,

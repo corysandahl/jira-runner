@@ -29,7 +29,7 @@ var callback = function(payload) {
 				log.all.forEach(function(commit) {
 					commit.repo = configMaster.gitRepos[i];					
 					for (name in configMaster.users) {
-						configMaster.users[name].aliases.forEach(function(alias) {
+						configMaster.users[name].gitAliases.forEach(function(alias) {
 							if (alias == commit.author_name) {
 								commit.display_name = name;
 							}

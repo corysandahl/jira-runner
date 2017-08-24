@@ -1,29 +1,38 @@
-var config = {
-	users: {
-		"Nathan Deren": {
-			"aliases": ["Nathan Deren", "nathan.deren"],
-			"email": "nderen@gmail.com",
-			"commits": {}
-		},
-		"Parker Coleman": {
-			"aliases": ["Parker Coleman", "parkercoleman"],
-			"email": "	",
-			"commits": {}
-		},
-		"Taylor Rolison": {
-			"aliases": ["Taylor Rolison", "trolison", "taylor-rolison"],
-			"email": "",
-			"commits": {}
-		},
-		"Tim Sweany": {
-			"aliases": ["Tim Sweany", "Timothy Sweany"],
-			"email": "",
-			"commits": {}
-		},
+var utils = require('./utils.js');
+
+var users = 
+{
+	"Nathan Deren": {
+		"gitAliases": ["Nathan Deren", "nathan.deren"],
+		"email": "nderen@gmail.com",
+		"jiraName": "nathan.deren",
+		"commits": {}
 	},
+	"Parker Coleman": {
+		"gitAliases": ["Parker Coleman", "parkercoleman"],
+		"email": "	",
+		"jiraName": "parker.coleman",
+		"commits": {}
+	},
+	"Taylor Rolison": {
+		"gitAliases": ["Taylor Rolison", "trolison", "taylor-rolison"],
+		"email": "",
+		"jiraName": "taylor.rolison",
+		"commits": {}
+	},
+	"Tim Sweany": {
+		"gitAliases": ["Tim Sweany", "Timothy Sweany"],
+		"email": "",
+		"jiraName": "tim.sweany",
+		"commits": {}
+	}
+}
+
+var config = {
+	users: users,
 	jiraConfig: {
 		title: 'DS POD - Since Beginning of 2017',
-		query: "assignee IN ('nathan.deren','parker.coleman','taylor.rolison', 'tim.sweany') AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
 		options: {
 			startAt: 0,
 			maxResults: 100,
