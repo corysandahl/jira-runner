@@ -38,7 +38,8 @@ var config = {
 	users: users,
 	jiraConfig: {
 		title: 'GTC POD - Since Beginning of 2017',
-		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		// query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= '2017-08-01' ORDER BY assignee ASC, resolutiondate ASC",
 		options: {
 			startAt: 0,
 			maxResults: 100,

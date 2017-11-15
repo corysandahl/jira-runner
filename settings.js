@@ -3,7 +3,7 @@ var settings = {
     apiSettings: {
         url: 'jira.zonarsystems.net',
         userName: 'cory.sandahl',
-        password: ''
+        password: 'H1h2h3h4!'
     },
     payloadObject: {
         "Errors": [],

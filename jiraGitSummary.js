@@ -129,6 +129,10 @@ var callback = function(payload) {
 			// Wrap it up in an object and send off to EJS land
 			// ************************************************
 
+
+			// console.log(JSON.stringify(configMaster, null, 4))
+			// return;
+
 			var ret = ejs.render(str, 
 			{
 			  monthsMaster: monthsMaster,

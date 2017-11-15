@@ -2,15 +2,10 @@ var utils = require('./utils.js');
 
 var users = 
 {
-	"Nadia Bahrami": {
-		"gitAliases": ["Nadia Bahrami", "nadiabahrami"],
-		"jiraName": "nadia.bahrami",
+	"Mitch Lustig": {
+		"gitAliases": ["Mitch Lustig"],
+		"jiraName": "c.mitch.lustig",
 		"commits": {},
-	},
-	"Agata Kargol": {
-		"gitAliases": ["Agata Kargol", "aukargol"],
-		"jiraName": "agata.kargol",
-		"commits": {}
 	},
 	"Amina Mansour": {
 		"gitAliases": ["amina.mansour","aminamansour"],
@@ -18,7 +13,7 @@ var users =
 		"commits": {}
 	},
 	"Jeff Brown": {
-		"gitAliases": ["Jeff Brown"],
+		"gitAliases": ["Jeff Brown", "Brown", "jbrown0824"],
 		"jiraName": "c.jeff.brown",
 		"commits": {}
 	},
