@@ -28,7 +28,8 @@ var config = {
 	users: users,
 	jiraConfig: {
 		title: 'Pupil POD - Since Beginning of 2017',
-		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		// query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= startOfYear() ORDER BY assignee ASC, resolutiondate ASC",
+		query: "assignee IN (" + utils.getJiraNames(users) + ") AND resolutiondate >= -30d ORDER BY assignee ASC, resolutiondate ASC",
 		options: {
 			startAt: 0,
 			maxResults: 100,

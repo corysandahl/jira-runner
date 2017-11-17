@@ -13,25 +13,27 @@ var config = {
 	callback: function(payload) {
 		utils.reportHeader(config, payload);
 
-		// Group By Assignee
+		// Group By Status
 		var status = _.groupBy(payload.Results, function(obj) {
 			return obj.fields.status.name;
 		});
 
-		for (name in status) {
-			console.log('  Items In Status \"' + name + '\"');
+		var statusOrder =  ['In Development', 'To Do', 'Done'];
+
+		statusOrder.forEach(function(name) {
+			console.log('  Status \"' + name + '\"');
 			console.log(' ', '-'.repeat(55));
 			status[name].forEach(function(item) {
 				console.log(
 					utils.tableCell(' ', 3),
 					utils.tableCell(item.key, 8),
 					utils.tableCell(item.fields.created, 11),
-					utils.tableCell(item.fields.status.name, 8),
-					utils.tableCell(item.fields.summary, 50)
+					utils.tableCell(item.fields.status.name, 7),
+					utils.tableCell(item.fields.summary, 100)
 				)
 			})
 			console.log();
-		}
+		})
 	}	
 }
 
