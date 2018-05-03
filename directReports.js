@@ -4,10 +4,6 @@ var _ = require('lodash'),
 	teams = require('./teams.js');
 	
 const manager = 'Cory';
-// const manager = 'Sesh';
-// const manager = 'Leo';
-// const manager = 'Conner';
-// const manager = 'Jennifer';
 
 var config = {
 	title: 'Team ' + manager + ' - Work Items and Story Points Report - By Assignee / Month',
