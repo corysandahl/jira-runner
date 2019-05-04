@@ -35,6 +35,29 @@ The included **example.js** file is configured to find all issues where resoluti
 
   module.exports = config;
   ```
+There are 3 important properties of the config object:
+
+**query**
+```
+    query: "resolutiondate >= startOfDay() ORDER BY resolutiondate ASC",
+```
+This property defines the JQL that is passed along and executed by JIRA.
+
+**fields**
+```
+      fields: ['summary','issuetype','status','assignee','customfield_10105','resolutiondate']
+```
+This property tells JIRA which fields to return under the fields property of the returned issue.
+
+**callback**
+```
+    callback: function(payload) {
+      // Can be any valid JavaScript
+      reports.workItemsStoryPointsByMonth(config, payload);
+    }	
+```
+This property contains the callback, or the code that does something with the returned records.  It can be any valid JavaScript.  
+
 To run this report:
 
 ```node jiraRunner.js example.js```
