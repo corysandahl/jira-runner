@@ -1,6 +1,6 @@
 # jira-runner
 
-JIRA Runner is a simple node module that wraps an existing node JIRA client (https://github.com/steves/node-jira).  The wrapper exposes only the read operation and currently only supports executing JQL queries.  
+JIRA Runner is a simple node module that wraps an existing node JIRA client (https://github.com/steves/node-jira).  The wrapper exposes only executing JQL queries.  
 
 **Note:** You will need provide your JIRA URL, user name and password (API Token provided by Atlassian) in **settings.js**.  
 
