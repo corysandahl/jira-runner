@@ -2,15 +2,21 @@
 
 JIRA Runner is a simple node module that wraps an existing node JIRA client (https://github.com/steves/node-jira).  The wrapper exposes only executing JQL queries.  
 
-**Note:** You will need to provide your JIRA URL, user name and password (API Token provided by Atlassian) in **settings.js**.  
-
-*See [API Tokens](https://confluence.atlassian.com/cloud/api-tokens-938839638.html) for more information on creating your API token.*
-
 ## Installation ##
 
   Install with the node package manager [npm](http://npmjs.org):
 
     $ npm install
+
+  You will need to change the url, userName and passwored Api property settings in **settings.js** in order to connect to your JIRA instance.
+  ```
+     apiSettings: {
+        url: 'mycompany.atlassian.net',
+        userName: 'myJiraUserName',
+        password: '<API Token>'
+    },
+  ```
+*See [API Tokens](https://confluence.atlassian.com/cloud/api-tokens-938839638.html) for more information on creating your API token.*
 
 ## Example ##
 
