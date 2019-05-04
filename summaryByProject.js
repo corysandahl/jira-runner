@@ -11,7 +11,7 @@ var config = {
 	options: {
 		startAt: 0,
 		maxResults: 200,
-		fields: ['summary','project','issuetype','status','customfield_10013', 'resolutiondate']
+		fields: ['summary','project','issuetype','status','customfield_10105', 'resolutiondate']
 	},
 	callback: function(payload) {
 		// utils.debug(payload);

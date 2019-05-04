@@ -8,7 +8,7 @@ var config = {
 	options: {
 		startAt: 0,
 		maxResults: 200,
-		fields: ['summary','issuetype','status','project', 'assignee','customfield_10013', 'resolutiondate']
+		fields: ['summary','issuetype','status','project', 'assignee','customfield_10105', 'resolutiondate']
 	},
 	callback: function(payload) {
 
@@ -25,7 +25,7 @@ var config = {
 				workItems: projects[project].length, 
 				storyPoints: _.sumBy(projects[project], 
 					function(obj) { 
-						return obj.fields.customfield_10013;
+						return obj.fields.customfield_10105;
 					})
 			};
 		}
@@ -62,7 +62,7 @@ var config = {
 			
 			for (month in months) {
 
-				console.log('\n  ' + month + ' work items: [' + months[month].length + '] sum points: [' + _.sumBy(months[month], function(obj) { return obj.fields.customfield_10013}) + ']\n');
+				console.log('\n  ' + month + ' work items: [' + months[month].length + '] sum points: [' + _.sumBy(months[month], function(obj) { return obj.fields.customfield_10105}) + ']\n');
 				var l = {key: 18, assignee: 20, type: 10, points: 8, resMonth: 13, summary: 85};
 				console.log('         '.concat(
 					utils.tableCell('key', l.key), 
@@ -75,7 +75,7 @@ var config = {
 				console.log('         ' + '-'.repeat(91))
 
 				months[month].forEach(function(item) {
-					var points = (item.fields.customfield_10013) ? item.fields.customfield_10013.toString() : 'null',
+					var points = (item.fields.customfield_10105) ? item.fields.customfield_10105.toString() : 'null',
 						assignee = (item.fields.assignee) ? item.fields.assignee.name : 'Unknown';
 					console.log('         '.concat(
 						utils.tableCell(item.key, l.key), 

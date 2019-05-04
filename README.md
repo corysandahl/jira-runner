@@ -26,7 +26,7 @@ The included **example.js** file is configured to find all issues where resoluti
     options: {
       startAt: 0,
       maxResults: 100,
-      fields: ['summary','issuetype','status','assignee','customfield_10013','resolutiondate']
+      fields: ['summary','issuetype','status','assignee','customfield_10105','resolutiondate']
     },
     callback: function(payload) {
       reports.workItemsStoryPointsByMonth(config, payload);

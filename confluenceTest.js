@@ -14,7 +14,7 @@ var config = {
 	options: {
 		startAt: 0,
 		maxResults: 100,
-		fields: ['summary','issuetype','status','assignee','customfield_10013', 'resolutiondate']
+		fields: ['summary','issuetype','status','assignee','customfield_10105', 'resolutiondate']
 	},
 	callback: function(payload) {
 		confluence.getContentByPageTitle('~cory.sandahl', 'JIRA Runner Reports', function(err, data) {
@@ -35,8 +35,8 @@ var config = {
 					workItems: assignees[name].length, 
 					storyPoints: _.sumBy(assignees[name], 
 						function(obj) { 
-							if (obj.fields.customfield_10013) {
-								return obj.fields.customfield_10013;
+							if (obj.fields.customfield_10105) {
+								return obj.fields.customfield_10105;
 							} else {
 								return 0;
 							}

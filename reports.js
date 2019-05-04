@@ -30,7 +30,7 @@ reports = {
 				workItems: assignees[name].length, 
 				storyPoints: _.sumBy(assignees[name], 
 					function(obj) { 
-						return obj.fields.customfield_10013;
+						return obj.fields.customfield_10105;
 					})
 			};
 		}
@@ -62,7 +62,7 @@ reports = {
 			console.log('-'.repeat(100));
 			
 			for (date in grp) {
-				console.log('\nMONTH: ' + date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10013}) + ']\n');
+				console.log('\nMONTH: ' + date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10105}) + ']\n');
 				var l = {key: 18, type: 10, points: 8, resdate: 13, summary: 85};
 				console.log('    '.concat(
 					utils.tableCell('key', l.key), 
@@ -74,7 +74,7 @@ reports = {
 				console.log('    ' + '-'.repeat(96))
 
 				grp[date].forEach(function(item) {
-					var points = (item.fields.customfield_10013) ? item.fields.customfield_10013.toString() : 'null';
+					var points = (item.fields.customfield_10105) ? item.fields.customfield_10105.toString() : 'null';
 					console.log('    '.concat(
 						utils.tableCell(item.key, l.key), 
 						utils.tableCell(item.fields.issuetype.name, l.type),
@@ -128,7 +128,7 @@ reports = {
 				console.log(
 					'Assignee: ' + displayName + 
 					'MONTH: ' 
-					+ date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10013}) + ']');
+					+ date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10105}) + ']');
 				var l = {key: 18, type: 10, points: 8, resdate: 13, summary: 85};
 			}
 		}
@@ -157,7 +157,7 @@ reports = {
 				workItems: projects[project].length, 
 				storyPoints: _.sumBy(projects[project], 
 					function(obj) { 
-						return obj.fields.customfield_10013;
+						return obj.fields.customfield_10105;
 					})
 			};
 		}
@@ -189,7 +189,7 @@ reports = {
 			console.log('-'.repeat(100));
 			
 			for (date in grp) {
-				console.log('\nMONTH: ' + date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10013}) + ']\n');
+				console.log('\nMONTH: ' + date + ' - WORK ITEMS: [' + grp[date].length + '] - SUM POINTS: [' + _.sumBy(grp[date], function(obj) { return obj.fields.customfield_10105}) + ']\n');
 				var l = {key: 10, type: 10, points: 8, resdate: 13, summary: 85};
 				console.log('    '.concat(
 					utils.tableCell('key', l.key), 
@@ -201,7 +201,7 @@ reports = {
 				console.log('    ' + '-'.repeat(96))
 
 				grp[date].forEach(function(item) {
-					var points = (item.fields.customfield_10013) ? item.fields.customfield_10013.toString() : 'null';
+					var points = (item.fields.customfield_10105) ? item.fields.customfield_10105.toString() : 'null';
 					console.log('    '.concat(
 						utils.tableCell(item.key, l.key), 
 						utils.tableCell(item.fields.issuetype.name, l.type),

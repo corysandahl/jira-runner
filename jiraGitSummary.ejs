@@ -21,7 +21,7 @@ SUMMARY BY ASSIGNEE BY MONTH
 
 	var sp = _.sumBy(summary[assignee].details[month], 
 		function(obj) { 
-			return obj.fields.customfield_10013;
+			return obj.fields.customfield_10105;
 		})
 
   if (sp == "") sp = 0;
@@ -45,7 +45,7 @@ Story Points: <%=summary[assignee].storyPoints%>
     Key          Issue Type   Story Points Description
     -------------------------------------------------------------------------------------------
     <%summary[assignee].details[month].forEach(function(item) {
-        var sp = item.fields.customfield_10013 || 0;
+        var sp = item.fields.customfield_10105 || 0;
     %>
     <%=utils.tableCell(item.key, 12)%> <%-utils.tableCell(item.fields.issuetype.name, 12)%> <%-utils.tableCell(sp.toString(), 12)%> <%-item.fields.summary%><%})%>
 

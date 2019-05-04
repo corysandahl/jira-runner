@@ -102,7 +102,7 @@ var callback = function(payload) {
 					workItems: assignees[name].length, 
 					storyPoints: _.sumBy(assignees[name], 
 						function(obj) { 
-							return obj.fields.customfield_10013;
+							return obj.fields.customfield_10105;
 						})
 				};
 				if (summary[name].storyPoints == undefined) summary[name].storyPoints = 0;

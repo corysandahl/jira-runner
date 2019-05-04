@@ -1,9 +1,9 @@
 var settings = {
-    confluenceBaseURL: 'https://confluence.zonarsystems.net',
+    confluenceBaseURL: 'https://sterlingts.atlassian.net',
     apiSettings: {
-        url: 'jira.zonarsystems.net',
-        userName: 'cory.sandahl',
-        password: 'H1h2h3h4!'
+        url: 'mycompany.atlassian.net',
+        userName: 'myJiraUserName',
+        password: '<API Token>'
     },
     payloadObject: {
         "Errors": [],
