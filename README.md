@@ -8,7 +8,7 @@ JIRA Runner is a simple node module that wraps an existing node JIRA client (htt
 
     $ npm install
 
-  You will need to change the url, userName and passwored Api property settings in **settings.js** in order to connect to your JIRA instance.
+  You will need to change the *url, userName and password* Api property settings in **settings.js** in order to connect to your JIRA instance.
   ```
      apiSettings: {
         url: 'mycompany.atlassian.net',
