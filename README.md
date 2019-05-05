@@ -20,7 +20,7 @@ JIRA Runner is a simple Node.js module that provides JQL querying of the JIRA Re
 
 ## Example ##
 
-The included **example.js** file is configured to find all issues where resolutiondate is greater than the start of current day:
+The included **example.js** report configuration file returns all JIRA issues where resolutiondate is greater than the start of current day:
 
   ```
   var utils = require('./utils.js'),
@@ -41,7 +41,7 @@ The included **example.js** file is configured to find all issues where resoluti
 
   module.exports = config;
   ```
-There are 3 important properties of the config object:
+There are 3 important properties of a report configuration object:
 
 **query**
 ```
@@ -62,10 +62,8 @@ This property tells JIRA which fields to return under the fields property of the
       reports.workItemsStoryPointsByMonth(config, payload);
     }	
 ```
-This property contains the callback, or the code that does something with the returned records.  It can be any valid JavaScript.  
+This property contains the callback, or the code that does something with the returned records.  It can be any valid JavaScript.  In the example above, the callback passes both the report configuration and resulting payload to a JavaScript function workItemsStoryPointsByMonth that provides both a summary and detailed view of JIRA items by assignee by month. 
 
-To run this report:
+To run this file:
 
 ```node jiraRunner.js example.js```
-
-The callback function can contain any valid JavaScript.  In the example above, the callback is executing an included report template **workItemsStoryPointsByMonth** that provides a summary by assignee plus a detail rollup by assignee and month.
